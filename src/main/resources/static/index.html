@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OracleBot — Gestor de Tareas</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🤖</span>
+        <span class="logo-text">OracleBot</span>
+      </div>
+      <p class="header-sub">Gestor de Tareas · Interfaz Web</p>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- PANEL IZQUIERDO: TAREAS -->
+    <section class="panel" id="tasks-panel">
+      <div class="panel-header">
+        <h2>Tareas del Proyecto</h2>
+        <button id="refresh-tasks" type="button" class="btn btn-outline">↻ Actualizar</button>
+      </div>
+
+      <form id="task-form" class="task-form" novalidate>
+        <div class="form-group full-width">
+          <label for="title">Título <span class="required">*</span></label>
+          <input id="title" type="text" placeholder="Ej. Revisar endpoints de autenticación" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="assignee">Responsable</label>
+            <input id="assignee" type="text" placeholder="Ej. Ana">
+          </div>
+          <div class="form-group">
+            <label for="storyPoints">Story Points</label>
+            <input id="storyPoints" type="number" min="1" max="21" placeholder="3">
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label for="sprintName">Sprint</label>
+          <input id="sprintName" type="text" placeholder="Ej. Sprint 1">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submit-task-btn">＋ Crear Tarea</button>
+          <div id="task-form-feedback" class="form-feedback" aria-live="polite"></div>
+        </div>
+      </form>
+
+      <div id="task-loading" class="loading-indicator" hidden>
+        <span class="spinner"></span> Cargando…
+      </div>
+      <div id="task-empty" class="empty-state" hidden>
+        <span>📋</span>
+        <p>No hay tareas registradas todavía.</p>
+      </div>
+      <div id="task-list" class="task-list"></div>
+    </section>
+
+    <!-- PANEL DERECHO: CHAT -->
+    <section class="panel chat-panel" id="chat-panel">
+      <div class="panel-header">
+        <div>
+          <h2>Asistente IA</h2>
+          <p class="panel-sub">Mismo motor que el bot de Telegram</p>
+        </div>
+        <button id="clear-chat" type="button" class="btn btn-ghost btn-sm">Limpiar</button>
+      </div>
+
+      <div id="chat-messages" class="chat-messages" role="log" aria-live="polite"></div>
+
+      <form id="chat-form" class="chat-form" novalidate>
+        <div class="chat-input-row">
+          <input id="chat-input" type="text" placeholder="Escribe tu consulta…" autocomplete="off" required>
+          <button type="submit" class="btn btn-primary" id="chat-send-btn">Enviar</button>
+        </div>
+      </form>
+
+      <div class="chat-hints">
+        <span class="hints-label">Sugerencias:</span>
+        <button class="hint" type="button" data-message="que tareas tiene ana">tareas de Ana</button>
+        <button class="hint" type="button" data-message="como va el sprint actual">sprint actual</button>
+        <button class="hint" type="button" data-message="quien tiene mas carga">carga del equipo</button>
+        <button class="hint" type="button" data-message="cuales tareas siguen pendientes">pendientes</button>
+        <button class="hint" type="button" data-message="ayuda">ayuda</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
